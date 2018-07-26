@@ -1,8 +1,6 @@
-# Capistrano::Vault
+# Capistrano Vault
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/capistrano/vault`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Provide capistrano access your Hashicrop Vault server to signature certificate to ssh into server, or read access token saved in Vault.
 
 ## Installation
 
@@ -12,17 +10,32 @@ Add this line to your application's Gemfile:
 gem 'capistrano-vault'
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install capistrano-vault
-
 ## Usage
 
-TODO: Write usage instructions here
+### SSH without config
+
+Enable SSH Plugin in Capfile
+
+```ruby
+# ...
+require "capistrano/vault"
+
+# This Hook will override your ssh options to use signed key and publickey mode to ssh.
+install_plugin Capistrano::Vault::SSH
+```
+
+Setup the options to sign
+
+```ruby
+set :vault_address, 'https://vault.example.com' # It not set, it will use EVN['VAULT_ADDR']
+set :vault_ssh_mount_path, 'ssh-client-signer'
+set :vault_ssh_role, 'deploy'
+```
+
+And before running capistrano command, make sure you are already `vault login`
+
+> Make sure your are added the trusted ca in your server.
+
 
 ## Development
 
@@ -32,4 +45,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/capistrano-vault.
+Bug reports and pull requests are welcome on GitHub at https://github.com/elct9620/capistrano-vault.
