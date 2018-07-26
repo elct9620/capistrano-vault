@@ -27,12 +27,12 @@ install_plugin Capistrano::Vault::SSH
 Setup the options to sign
 
 ```ruby
-set :vault_address, 'https://vault.example.com' # It not set, it will use EVN['VAULT_ADDR']
+set :vault_address, 'https://vault.example.com' # If not set, it will use EVN['VAULT_ADDR']
 set :vault_ssh_mount_path, 'ssh-client-signer'
 set :vault_ssh_role, 'deploy'
 ```
 
-And before running capistrano command, make sure you are already `vault login`
+Before running capistrano command, make sure you are already `vault login`
 
 > Make sure your are added the trusted ca in your server.
 
