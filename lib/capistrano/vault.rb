@@ -12,5 +12,3 @@ module Capistrano
     # Your code goes here...
   end
 end
-
-load File.expand_path('../tasks/vault.cap', __FILE__)
